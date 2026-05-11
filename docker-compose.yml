@@ -1,0 +1,36 @@
+services:
+  #Database for the Search Microservice
+  db-search:
+    image: postgres:15
+    container_name: vg-search-db
+    environment:
+      POSTGRES_USER: user_search
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: search_db
+    ports:
+      - "5433:5432" 
+
+  #Database for the CRUD Microservice
+  db-crud:
+    image: postgres:15
+    container_name: vg-crud-db
+    environment:
+      POSTGRES_USER: user_crud
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: crud_db
+    ports:
+      - "5434:5432" 
+
+  # GUI to manage both databases
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: vg-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@vgdb.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db-search
+      - db-crud

@@ -1,0 +1,20 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: game-search-service
+  datasource:
+    url: jdbc:postgresql://localhost:5433/search_db
+    username: user_search
+    password: password123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    http-client-adapter: rest-template
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
